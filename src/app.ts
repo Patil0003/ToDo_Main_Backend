@@ -1,20 +1,21 @@
 import express from "express";
-import mongoose from "mongoose";
-import config from "./config/config";
+import cors from "cors";
+import bodyParser from "body-parser";
+ import Userroot from './route/user'
+import { mongoconnection } from './database'
+import dotenv from "dotenv";
+dotenv.config();
+  const  app = express();
 
-const app = express();
-const db = config;
-// database
-const MONGO_URI = `mongodb://${db.staging.DB.HOST}/${db.staging.DB.PORT}:${db.staging.DB.DATABASE}`;
-mongoose.connect(MONGO_URI);
-const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log(`Database Connected :- ${MONGO_URI}`);
+mongoconnection();
+
+app.use(cors({ origin: "*" }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded(Object({ extended: true })));
+app.use("/user", Userroot);
+
+const port = process.env.PORT;
+app.listen(port, (): void => {
+  console.log(`server running on ${port}`);
 });
-// port
-const port = 5000;
-app.listen(port, () => console.log(`Listening on port :- ${port}`));
-
-
-
 export default app;
