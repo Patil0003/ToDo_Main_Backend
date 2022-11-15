@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from './index'
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -26,6 +27,6 @@ const userSchema = new mongoose.Schema({
     },
   ],
 });
-
-const User = mongoose.model("User", userSchema);
-export default User;
+const userModel = mongoose.model<User & mongoose.Document>("User", userSchema);
+// const User = mongoose.model("User", userSchema);
+export default userModel;
