@@ -8,12 +8,13 @@ import express from "express";
    deleteTask
  } from "../controller/user";
 const router = express.Router();
+
 router.post("/signup", registration);
 router.post("/login", login);
 router.post("/add-task", addTask);
 router.get("/show-list", getList);
 router.post("/update-task", updateTodo);
-router.put("/deletetask", deleteTask);
+router.put("/delete-task", deleteTask);
 
 export default router;
 

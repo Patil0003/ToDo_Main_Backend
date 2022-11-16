@@ -81,11 +81,12 @@ export const login = async (req: Request, res: Response) => {
     throw e;
   }
 };
+
 // add-task
 export const addTask = async (req: Request, res: Response) => {
   try {
     const { _id, todo } = req.body;
-    console.log(_id, todo);
+    // console.log(_id, todo);
     let data = {
       todo,
     };
