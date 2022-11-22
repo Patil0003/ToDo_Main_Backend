@@ -20,7 +20,7 @@ export const registration = async (req: Request, res: Response) => {
       password,
       mobile,
       todoArray,
-      image: req.file?.filename,
+      // image: req.file?.filename,
 
     });
       // console.log("image", userSignup);     

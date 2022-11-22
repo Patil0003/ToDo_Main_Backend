@@ -11,8 +11,8 @@ import { upload } from "../middleware/uploadfile";
  
 const router = express.Router();
 
-// router.post("/signup",registration);
-router.post("/signup", upload.single("image"), registration);
+router.post("/signup",registration);
+// router.post("/signup", upload.single("image"), registration);
 router.post("/login", login);
 router.post("/add-task", addTask);
 router.get("/show-list", getList);
