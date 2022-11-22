@@ -10,7 +10,7 @@ export const mongoconnection = async () => {
       if (error) {
         console.log(error);
       } else {
-        console.log(`Database Connected :-${MONGO_URI}`);
+        console.log(`Database Connected :- ${MONGO_URI}`);
       }
     });
   } catch (e) {

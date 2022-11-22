@@ -1,0 +1,156 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Todo_List",
+    "description": "Todo_List using Microservice Architecture"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8989/",
+      "description": "Our local server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Todo-List",
+      "description": "Operations about User's TODO_LIST"
+    }
+  ],
+  "paths": {
+    "/user/signup/": {
+      "post": {
+        "tags": ["Todo-List"],
+        "summary": " This is post api for user registration",
+        "description": "User registation using their name, contact number, email & password",
+        "operationId": "user_signup",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserType"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success response"
+           
+          }
+        }
+      }
+    },
+    "/user/login/": {
+      "post": {
+        "tags": ["Todo-List"],
+        "summary": " This is post api for user login",
+        "description": "",
+        "operationId": "user_login",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserType"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "success response"
+          
+          }
+        }
+      }
+    },
+    "/user/add-task/": {
+      "post": {
+        "tags": ["Todo-List"],
+        "summary": " This is post api for add task",
+        "description": "",
+        "operationId": "adding task",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/todolist"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "success response"
+            
+          }
+        }
+      }
+    },
+    "/user/update-task/": {
+      "post": {
+        "tags": ["Todo-List"],
+        "summary": " This is post api for update task",
+        "description": "",
+        "operationId": "update task",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/todolist"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "success response"
+            
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },     
+      "todolist": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "todoID": {
+            "type": "string"
+          },
+          "todo": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

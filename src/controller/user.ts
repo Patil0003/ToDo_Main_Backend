@@ -10,7 +10,7 @@ export const registration = async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
     if (user) {
       return res.send({
-        status: false,
+        status: 400,
         message: "Already Registered",
       });
     }
@@ -20,19 +20,21 @@ export const registration = async (req: Request, res: Response) => {
       password,
       mobile,
       todoArray,
-      // image: req.file.filename,
+      image: req.file?.filename,
+
     });
+      // console.log("image", userSignup);     
+
     const response = await userSignup.save();
     if (response) {
-     
       return res.json({
-        status: true,
+        status: 200,
         message: "Registered Successfully",
         result: response,
       })
     } else {
      return res.json({
-        status: false,
+        status: 400,
         message: "Re-Try",
       })
     }
@@ -47,14 +49,14 @@ export const login = async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.json({
-        status: false,
+        status: 400,
         message: "User Not Exits"
       })
 
     } else {
       if (password !== user.password) {
         return res.json({
-          status: false,
+          status: 400,
           message: "Incorrect Password"
         })
 
@@ -69,7 +71,7 @@ export const login = async (req: Request, res: Response) => {
         if (err) console.log(err)
         else {
           return res.json({
-            status: true,
+            status: 200,
             message: "Login Successfully",
             Token: token,
             result: user
@@ -97,7 +99,7 @@ export const addTask = async (req: Request, res: Response) => {
     );
     if (response) {
       return res.json({
-        status: true,
+        status: 200,
         message: "Task added successfully",
         result: response,
       });
@@ -113,7 +115,7 @@ export const getList = async (req: Request, res: Response) => {
     const result = await User.find();
     if (result) {
       return res.json({
-        status: true,
+        status: 200,
         message: "Success",
         result: result,
       });
@@ -138,12 +140,12 @@ export const updateTodo = async (req:Request, res: Response) => {
 
     if (!result) {
       return res.json({
-        status: false,
+        status: 404,
         message: "not updated",
       });
     } else {
       return res.json({
-        status: true,
+        status: 200,
         message: "successfully updated",
         result: result,
       });
@@ -167,13 +169,13 @@ export const deleteTask = async (req: Request, res: Response) => {
 
     if (response) {
       return res.json({
-        status: true,
+        status: 200,
         message: "Deleted successfully",
         result: response,
       });
     } else {
      return res.json({
-       status: false,
+       status: 400,
        message: "Not Deleted successfully",
      });
     }
