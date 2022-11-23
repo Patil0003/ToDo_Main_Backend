@@ -37,7 +37,6 @@
         "responses": {
           "200": {
             "description": "success response"
-           
           }
         }
       }
@@ -62,7 +61,6 @@
         "responses": {
           "200": {
             "description": "success response"
-          
           }
         }
       }
@@ -87,17 +85,17 @@
         "responses": {
           "200": {
             "description": "success response"
-            
           }
         }
       }
     },
     "/user/update-task/": {
-      "post": {
+      "put": {
         "tags": ["Todo-List"],
-        "summary": " This is post api for update task",
+        "summary": " This is put api for update task",
         "description": "",
         "operationId": "update task",
+
         "requestBody": {
           "description": "",
           "content": {
@@ -111,8 +109,47 @@
 
         "responses": {
           "200": {
-            "description": "success response"
-            
+            "description": " Response Success"
+          }
+        }
+      }
+    },
+    "/user/delete-task/": {
+      "delete": {
+        "tags": ["Todo-List"],
+        "summary": " This is delete api for update task",
+        "description": "",
+        "operationId": "Delete the task",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/todolist"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": " Response Success"
+          }
+        }
+      }
+    },
+    "/user/show-list/": {
+      "get": {
+        "tags": ["Todo-List"],
+        "summary": " This is get api for update task",
+        "description": "",
+        "operationId": "Show all data",
+
+        "responses": {
+          "200": {
+            "description": " Response Success"
+          },
+          "404": {
+            "description": "Data Not found"
           }
         }
       }
@@ -136,14 +173,14 @@
             "type": "string"
           }
         }
-      },     
+      },
       "todolist": {
         "type": "object",
         "properties": {
           "_id": {
             "type": "string"
           },
-          "todoID": {
+          "todoId": {
             "type": "string"
           },
           "todo": {
