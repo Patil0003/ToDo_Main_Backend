@@ -93,9 +93,34 @@
       }
     },
     "/user/update-task/": {
-      "post": {
+      "put": {
         "tags": ["Todo-List"],
         "summary": " This is post api for update task",
+        "description": "",
+        "operationId": "update task",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/todolist"
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "success response"
+            
+          }
+        }
+      }
+    },
+    "/user/delete-task/": {
+      "delete": {
+        "tags": ["Todo-List"],
+        "summary": " This is post api for delete task",
         "description": "",
         "operationId": "update task",
         "requestBody": {
@@ -143,7 +168,7 @@
           "_id": {
             "type": "string"
           },
-          "todoID": {
+          "todoId": {
             "type": "string"
           },
           "todo": {

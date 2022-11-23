@@ -114,7 +114,7 @@ export const getList = async (req: Request, res: Response) => {
   try {
     const result = await User.find();
     if (result) {
-      return res.json({
+      return res.status(200).json({
         status: 200,
         message: "Success",
         result: result,
@@ -139,13 +139,11 @@ export const updateTodo = async (req:Request, res: Response) => {
     //  console.log("Response",result)
 
     if (!result) {
-      return res.json({
-        status: 404,
+      return res.status(404).json({
         message: "not updated",
       });
     } else {
-      return res.json({
-        status: 200,
+      return res.status(200).json({
         message: "successfully updated",
         result: result,
       });
