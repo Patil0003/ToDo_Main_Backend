@@ -123,10 +123,7 @@ export const getList = async (req: Request, res: Response) => {
 export const updateTodo = async (req: Request, res: Response) => {
   try {
     const { _id, todoId, todo } = req.body;
-    console.log("req.body", _id, todoId, todo);
-    console.log("_id", typeof _id);
-    console.log("todo_id", typeof todoId);
-    console.log("string", typeof todo);
+
     const result = await User.findOneAndUpdate(
       {
         _id: new mongoose.Types.ObjectId(_id),
@@ -135,8 +132,6 @@ export const updateTodo = async (req: Request, res: Response) => {
       { $set: { "todoArray.$.todo": todo } },
       { new: true }
     );
-
-    console.log("Response", result);
 
     if (!result) {
       return res.status(404).json({

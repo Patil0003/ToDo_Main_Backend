@@ -23,7 +23,7 @@
         "tags": ["Todo-List"],
         "summary": " This is post api for user registration",
         "description": "User registation using their name, contact number, email & password",
-        "operationId": "user_signup",
+        "operationId": "User signup",
         "requestBody": {
           "description": "",
           "content": {
@@ -46,7 +46,7 @@
         "tags": ["Todo-List"],
         "summary": " This is post api for user login",
         "description": "",
-        "operationId": "user_login",
+        "operationId": "User login",
         "requestBody": {
           "description": "",
           "content": {
@@ -70,7 +70,7 @@
         "tags": ["Todo-List"],
         "summary": " This is post api for add task",
         "description": "",
-        "operationId": "adding task",
+        "operationId": "Adding task",
         "requestBody": {
           "description": "",
           "content": {
@@ -94,7 +94,7 @@
         "tags": ["Todo-List"],
         "summary": " This is put api for update task",
         "description": "",
-        "operationId": "update task",
+        "operationId": "Update task",
 
         "requestBody": {
           "description": "",
