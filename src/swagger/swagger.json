@@ -115,7 +115,7 @@
       }
     },
     "/user/delete-task/": {
-      "delete": {
+      "put": {
         "tags": ["Todo-List"],
         "summary": " This is delete api for update task",
         "description": "",
