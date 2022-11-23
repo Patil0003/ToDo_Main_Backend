@@ -16,8 +16,8 @@ router.post("/signup",registration);
 router.post("/login", login);
 router.post("/add-task", addTask);
 router.get("/show-list", getList);
-router.post("/update-task", updateTodo);
-router.put("/delete-task", deleteTask);
+router.put("/update-task", updateTodo);
+router.delete("/delete-task", deleteTask);
 
 export default router;
 
