@@ -9,8 +9,7 @@ export const registration = async (req: Request, res: Response) => {
     const { name, email, password, mobile, todoArray } = req.body;
     const user = await User.findOne({ email });
     if (user) {
-      return res.send({
-        status: 400,
+      return res.status(404).json({
         message: "Already Registered",
       });
     }
@@ -21,22 +20,19 @@ export const registration = async (req: Request, res: Response) => {
       mobile,
       todoArray,
       // image: req.file?.filename,
-
     });
-      // console.log("image", userSignup);     
+    // console.log("image", userSignup);
 
     const response = await userSignup.save();
     if (response) {
-      return res.json({
-        status: 200,
+      return res.status(200).json({
         message: "Registered Successfully",
         result: response,
-      })
+      });
     } else {
-     return res.json({
-        status: 400,
+      return res.status(404).json({
         message: "Re-Try",
-      })
+      });
     }
   } catch (e) {
     throw e;
@@ -48,36 +44,36 @@ export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.json({
-        status: 400,
-        message: "User Not Exits"
-      })
-
+      return res.status(404).json({
+        message: "User Not Exits",
+      });
     } else {
       if (password !== user.password) {
-        return res.json({
-          status: 400,
-          message: "Incorrect Password"
-        })
-
+        return res.status(404).json({
+          message: "Incorrect Password",
+        });
       }
       const payload = {
         email,
-        password: user.password
-      }
-      jwt.sign(payload, "SECRET_KEY", {
-        "expiresIn": "1h"
-      }, (err, token) => {
-        if (err) console.log(err)
-        else {
-          return res.json({
-            status: 200,
-            message: "Login Successfully",
-            Token: token,
-            result: user
-          })
+        password: user.password,
+      };
+      jwt.sign(
+        payload,
+        "SECRET_KEY",
+        {
+          expiresIn: "1h",
+        },
+        (err, token) => {
+          if (err) console.log(err);
+          else {
+            return res.status(200).json({
+              message: "Login Successfully",
+              Token: token,
+              result: user,
+            });
+          }
         }
-      })
+      );
     }
   } catch (e) {
     throw e;
@@ -98,8 +94,7 @@ export const addTask = async (req: Request, res: Response) => {
       { new: true }
     );
     if (response) {
-      return res.json({
-        status: 200,
+      return res.status(200).json({
         message: "Task added successfully",
         result: response,
       });
@@ -115,7 +110,6 @@ export const getList = async (req: Request, res: Response) => {
     const result = await User.find();
     if (result) {
       return res.status(200).json({
-        status: 200,
         message: "Success",
         result: result,
       });
@@ -126,25 +120,31 @@ export const getList = async (req: Request, res: Response) => {
 };
 
 // update
-export const updateTodo = async (req:Request, res: Response) => {
+export const updateTodo = async (req: Request, res: Response) => {
   try {
     const { _id, todoId, todo } = req.body;
-    // console.log(_id,todoId,todo)
+    console.log("req.body", _id, todoId, todo);
+    console.log("_id", typeof _id);
+    console.log("todo_id", typeof todoId);
+    console.log("string", typeof todo);
     const result = await User.findOneAndUpdate(
-      { _id: new mongoose.Types.ObjectId(_id), "todoArray._id": todoId },
+      {
+        _id: new mongoose.Types.ObjectId(_id),
+        "todoArray._id": new mongoose.Types.ObjectId(todoId),
+      },
       { $set: { "todoArray.$.todo": todo } },
       { new: true }
     );
 
-    //  console.log("Response",result)
+    console.log("Response", result);
 
     if (!result) {
       return res.status(404).json({
-        message: "not updated",
+        message: "Not Updated",
       });
     } else {
       return res.status(200).json({
-        message: "successfully updated",
+        message: "Updated Success",
         result: result,
       });
     }
@@ -155,30 +155,25 @@ export const updateTodo = async (req:Request, res: Response) => {
 
 // delete
 export const deleteTask = async (req: Request, res: Response) => {
-  
   try {
     const { _id, todoId } = req.body;
-
     const response = await User.findByIdAndUpdate(
       { _id: _id },
       { $pull: { todoArray: { _id: todoId } } },
       { new: true }
     );
-
-    if (response) {
-      return res.json({
-        status: 200,
+    if (!response) {
+      return res.status(400).json({
+        message: " Not Deleted successfully",
+        // result: response,
+      });
+    } else {
+      return res.status(200).json({
         message: "Deleted successfully",
         result: response,
       });
-    } else {
-     return res.json({
-       status: 400,
-       message: "Not Deleted successfully",
-     });
     }
   } catch (e) {
     throw e;
   }
 };
-
