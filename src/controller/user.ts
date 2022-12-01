@@ -19,9 +19,7 @@ export const registration = async (req: Request, res: Response) => {
       password,
       mobile,
       todoArray,
-      // image: req.file?.filename,
     });
-    // console.log("image", userSignup);
 
     const response = await userSignup.save();
     if (response) {
@@ -84,7 +82,7 @@ export const login = async (req: Request, res: Response) => {
 export const addTask = async (req: Request, res: Response) => {
   try {
     const { _id, todo } = req.body;
-    // console.log(_id, todo);
+    console.log(_id, todo);
     let data = {
       todo,
     };
@@ -123,10 +121,7 @@ export const getList = async (req: Request, res: Response) => {
 export const updateTodo = async (req: Request, res: Response) => {
   try {
     const { _id, todoId, todo } = req.body;
-    console.log("req.body", _id, todoId, todo);
-    console.log("_id", typeof _id);
-    console.log("todo_id", typeof todoId);
-    console.log("string", typeof todo);
+
     const result = await User.findOneAndUpdate(
       {
         _id: new mongoose.Types.ObjectId(_id),
@@ -135,8 +130,6 @@ export const updateTodo = async (req: Request, res: Response) => {
       { $set: { "todoArray.$.todo": todo } },
       { new: true }
     );
-
-    console.log("Response", result);
 
     if (!result) {
       return res.status(404).json({
@@ -169,7 +162,7 @@ export const deleteTask = async (req: Request, res: Response) => {
       });
     } else {
       return res.status(200).json({
-        message: "Deleted successfully",
+        message: "Deleted successfully ................",
         result: response,
       });
     }

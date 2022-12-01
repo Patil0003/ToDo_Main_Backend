@@ -7,17 +7,15 @@ import express from "express";
    updateTodo,
    deleteTask
 } from "../controller/user";
-import { upload } from "../middleware/uploadfile";
  
 const router = express.Router();
 
 router.post("/signup",registration);
-// router.post("/signup", upload.single("image"), registration);
 router.post("/login", login);
 router.post("/add-task", addTask);
 router.get("/show-list", getList);
 router.put("/update-task", updateTodo);
-router.delete("/delete-task", deleteTask);
+router.put("/delete-task", deleteTask);
 
 export default router;
 
