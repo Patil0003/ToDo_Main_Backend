@@ -19,9 +19,7 @@ export const registration = async (req: Request, res: Response) => {
       password,
       mobile,
       todoArray,
-      // image: req.file?.filename,
     });
-    // console.log("image", userSignup);
 
     const response = await userSignup.save();
     if (response) {
